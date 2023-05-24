@@ -1,2 +1,2 @@
-# SoundBlendBuilder
+# ShapeSymphony
 Outil graphique de création et assemblage de boucles musicales
