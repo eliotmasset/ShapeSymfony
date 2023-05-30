@@ -93,7 +93,7 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QGraphicsView" name="run_graphics_view"/>
+       <widget class="RunGraphicsView" name="run_graphics_view"/>
       </item>
      </layout>
     </item>
@@ -129,6 +129,13 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>RunGraphicsView</class>
+   <extends>QGraphicsView</extends>
+   <header>rungraphicsview.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
