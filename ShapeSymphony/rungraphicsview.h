@@ -13,11 +13,12 @@ public:
     ~RunGraphicsView();
     void setObjectName(QAnyStringView);
     void init();
+    void drawGrid(int paddingVertical, int paddingHoryzontal);
 
 private:
     RunGraphicsView *self;
     void paintEvent(QPaintEvent *event);
     int size;
-    int isDarkMode = false;
+    bool showGrid = true;
 };
 #endif // RUNGRAPHICSWIEW_H
