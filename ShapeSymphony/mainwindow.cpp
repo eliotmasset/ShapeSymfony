@@ -1,7 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "QtAwesome.h"
 
 #include <QPropertyAnimation>
+
+using namespace fa;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -22,7 +25,17 @@ void MainWindow::init()
     panelAnimation = new QPropertyAnimation(ui->slidingPanel, "maximumHeight");
     panelAnimation->setStartValue(0);
     panelAnimation->setDuration(500);
-    connect(ui->slidingPanelToggleButton, &QPushButton::clicked, this, &MainWindow::toggleSlidingPanel);
+    connect(ui->slidingPanelToggleButton, SIGNAL(clicked()), this, SLOT(toggleSlidingPanel()));
+    ui->run_graphics_view->setShowGrid(false);
+
+    // icons :
+    QtAwesome* awesome = new QtAwesome(qApp);
+    awesome->initFontAwesome();
+
+    ui->simple_mode_button->setIcon(awesome->icon("arrow-pointer"));
+    ui->expert_mode_button->setIcon(awesome->icon("pen-to-square"));
+
+    this->initTopPannel();
 }
 
 void MainWindow::toggleSlidingPanel()
@@ -38,4 +51,22 @@ void MainWindow::toggleSlidingPanel()
     panelAnimation->start();
 }
 
+
+void MainWindow::clickSimpleMode() {
+    ui->simple_mode_button->setDown(true);
+    ui->expert_mode_button->setDown(false);
+    ui->run_graphics_view->setShowGrid(false);
+}
+
+void MainWindow::clickExpertMode(){
+    ui->simple_mode_button->setDown(false);
+    ui->expert_mode_button->setDown(true);
+    ui->run_graphics_view->setShowGrid(true);
+}
+
+void MainWindow::initTopPannel() {
+    ui->simple_mode_button->setDown(true);
+    connect(ui->simple_mode_button, SIGNAL(clicked()), this, SLOT(clickSimpleMode()));
+    connect(ui->expert_mode_button, SIGNAL(clicked()), this, SLOT(clickExpertMode()));
+}
 

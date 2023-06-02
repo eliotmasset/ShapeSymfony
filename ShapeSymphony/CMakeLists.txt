@@ -70,3 +70,13 @@ if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(ShapeSymphony)
 endif()
 
+add_library(QtAwesome STATIC QtAwesome.cpp QtAwesome.h QtAwesomeFree.qrc QtAwesomeAnim.cpp QtAwesomeAnim.h)
+
+target_link_libraries(QtAwesome
+    Qt${QT_VERSION_MAJOR}::Widgets
+)
+
+target_link_libraries(ShapeSymphony PRIVATE
+    QtAwesome
+)
+

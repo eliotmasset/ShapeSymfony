@@ -18,11 +18,13 @@ public:
 
 private slots:
     void toggleSlidingPanel();
+    void clickSimpleMode();
+    void clickExpertMode();
 
 private:
     Ui::MainWindow *ui;
     QPropertyAnimation *panelAnimation;
-
+    void initTopPannel();
     void init();
 };
 
