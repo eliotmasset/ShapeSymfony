@@ -34,6 +34,8 @@ void MainWindow::init()
 
     ui->simple_mode_button->setIcon(awesome->icon("arrow-pointer"));
     ui->expert_mode_button->setIcon(awesome->icon("pen-to-square"));
+    ui->simple_mode_button->setCheckable(true);
+    ui->expert_mode_button->setCheckable(true);
 
     this->initTopPannel();
 }
@@ -53,19 +55,19 @@ void MainWindow::toggleSlidingPanel()
 
 
 void MainWindow::clickSimpleMode() {
-    ui->simple_mode_button->setDown(true);
-    ui->expert_mode_button->setDown(false);
+    ui->simple_mode_button->setChecked(true);
+    ui->expert_mode_button->setChecked(false);
     ui->run_graphics_view->setShowGrid(false);
 }
 
 void MainWindow::clickExpertMode(){
-    ui->simple_mode_button->setDown(false);
-    ui->expert_mode_button->setDown(true);
+    ui->simple_mode_button->setChecked(false);
+    ui->expert_mode_button->setChecked(true);
     ui->run_graphics_view->setShowGrid(true);
 }
 
 void MainWindow::initTopPannel() {
-    ui->simple_mode_button->setDown(true);
+    ui->simple_mode_button->setChecked(true);
     connect(ui->simple_mode_button, SIGNAL(clicked()), this, SLOT(clickSimpleMode()));
     connect(ui->expert_mode_button, SIGNAL(clicked()), this, SLOT(clickExpertMode()));
 }
