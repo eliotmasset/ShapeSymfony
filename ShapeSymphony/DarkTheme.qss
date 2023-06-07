@@ -63,6 +63,10 @@ QObject::item:disabled {
   color: #484848;
 }
 
+QGraphicsView {
+  background-color: #1D1D1D;
+}
+
 a {
   color: #39a5dd;
   text-decoration: none;
@@ -216,6 +220,10 @@ QPushButton {
 
 QPushButton:focus {
   background-color: #3e4f5e;
+}
+
+QPushButton:checked {
+  background-color: #298ce1;
 }
 
 QPushButton:hover {
