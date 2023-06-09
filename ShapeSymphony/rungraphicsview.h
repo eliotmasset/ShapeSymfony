@@ -13,8 +13,6 @@ public:
     RunGraphicsView(QWidget *parent = nullptr);
     ~RunGraphicsView();
     void setObjectName(QAnyStringView);
-    void init();
-    void drawGrid();
     void setShowGrid(bool showGrid = true);
     bool eventFilter(QObject *watched, QEvent *event);
 
@@ -24,11 +22,12 @@ private:
     int size;
     int paddingVertical;
     int paddingHorizontal;
-    QPainter *painter;
     QPen squarePen, gridPen, circlePen;
     bool showGrid = true;
     bool ctrlPress = false;
     QLineEdit* tooltipPosition;
+    void init();
+    void drawGrid(QPainter *painter);
     void setMouseTooltip(QGraphicsSceneMouseEvent *event);
     QPointF getPosMouseInRun(QPointF position);
     QPointF getPosInRun(QPointF position);

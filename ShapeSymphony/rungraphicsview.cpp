@@ -49,7 +49,6 @@ void RunGraphicsView::init()
     squarePen.setStyle(Qt::SolidLine);
     squarePen.setColor(*(new QColor(255,255,255)));
 
-
     circlePen.setWidth(2);
     circlePen.setStyle(Qt::SolidLine);
     circlePen.setColor(*(new QColor(255,0,255)));
@@ -69,32 +68,29 @@ QPointF RunGraphicsView::getPosInRun(QPointF position) {
 }
 
 void RunGraphicsView::paintEvent(QPaintEvent *event){
-    painter = new QPainter(viewport());
-    painter->setRenderHint(QPainter::Antialiasing);
-    bool widthGreaterThanHeight = this->width() >  this->height() ;
-    size = widthGreaterThanHeight ?  this->height()-(2*PADDING_RUN) :  this->width()-(2*PADDING_RUN);
-    paddingVertical = widthGreaterThanHeight ? PADDING_RUN : (this->height()-size)/2;
-    paddingHorizontal = widthGreaterThanHeight ? (this->width()-size)/2 : PADDING_RUN;
-    painter->setPen(squarePen);
-    painter->drawRect(paddingHorizontal,paddingVertical,size,size);
+    QPainter painter(viewport());
+    painter.setRenderHint(QPainter::Antialiasing);
+    bool widthGreaterThanHeight = width() >  height() ;
+    size = widthGreaterThanHeight ?  height()-(2*PADDING_RUN) :  width()-(2*PADDING_RUN);
+    paddingVertical = widthGreaterThanHeight ? PADDING_RUN : (height()-size)/2;
+    paddingHorizontal = widthGreaterThanHeight ? (width()-size)/2 : PADDING_RUN;
+    painter.setPen(squarePen);
+    painter.drawRect(paddingHorizontal,paddingVertical,size,size);
 
-    if(this->showGrid) this->drawGrid();
+    if(this->showGrid) this->drawGrid(&painter);
 
-    painter->setPen(circlePen);
+    painter.setPen(circlePen);
     for (unsigned i = 0; i < VCircleItems.size(); i++){
         QPointF pos = getPosInRun(QPointF(VCircleItems[i].getX(), VCircleItems[i].getY()));
-        painter->drawEllipse(pos.x(), pos.y(), size/SIZE_RUN, size/SIZE_RUN);
+        painter.drawEllipse(pos.x(), pos.y(), size/SIZE_RUN, size/SIZE_RUN);
     }
-
-    painter->end();
-    destroy(painter);
 }
 
 void RunGraphicsView::setObjectName(QAnyStringView name) {
     parent()->setObjectName(name);
 }
 
-void RunGraphicsView::drawGrid() {
+void RunGraphicsView::drawGrid(QPainter *painter) {
     painter->setPen(gridPen);
 
     for (int i = 1; i <= NB_LINES+1; i++) {
