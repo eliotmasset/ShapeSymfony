@@ -19,6 +19,8 @@ set(PROJECT_SOURCES
         mainwindow.ui
         rungraphicsview.cpp
         rungraphicsview.h
+        circleitem.cpp
+        circleitem.h
 )
 
 qt_add_resources(DarkTheme.qss DarkTheme.qss
