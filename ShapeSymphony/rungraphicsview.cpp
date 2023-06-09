@@ -45,6 +45,8 @@ void RunGraphicsView::init()
     show();
     grabKeyboard();
 
+    setFocusPolicy(Qt::StrongFocus);
+
     squarePen.setWidth(1);
     squarePen.setStyle(Qt::SolidLine);
     squarePen.setColor(*(new QColor(255,255,255)));
