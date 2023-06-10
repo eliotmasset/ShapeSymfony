@@ -35,6 +35,25 @@
       <property name="sizeConstraint">
        <enum>QLayout::SetMaximumSize</enum>
       </property>
+      <item row="1" column="2" rowspan="2">
+       <widget class="QFrame" name="right_frame">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item alignment="Qt::AlignTop">
+          <widget class="QPushButton" name="pushButton">
+           <property name="text">
+            <string>PushButton</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
       <item row="0" column="0" colspan="3">
        <widget class="QFrame" name="top_frame">
         <property name="frameShape">
@@ -55,28 +74,16 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="RunGraphicsView" name="run_graphics_view"/>
-      </item>
-      <item row="1" column="2" rowspan="2">
-       <widget class="QFrame" name="right_frame">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
+       <widget class="RunGraphicsView" name="run_graphics_view">
+        <property name="focusPolicy">
+         <enum>Qt::StrongFocus</enum>
         </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
+        <property name="contextMenuPolicy">
+         <enum>Qt::NoContextMenu</enum>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <item alignment="Qt::AlignTop">
-          <widget class="QPushButton" name="pushButton">
-           <property name="text">
-            <string>PushButton</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
        </widget>
       </item>
-      <item row="3" column="0" colspan="3">
+      <item row="2" column="1">
        <layout class="QVBoxLayout" name="slidingContainerLayout">
         <property name="spacing">
          <number>0</number>
@@ -86,6 +93,12 @@
         </property>
         <item>
          <widget class="QPushButton" name="slidingPanelToggleButton">
+          <property name="focusPolicy">
+           <enum>Qt::StrongFocus</enum>
+          </property>
+          <property name="contextMenuPolicy">
+           <enum>Qt::DefaultContextMenu</enum>
+          </property>
           <property name="text">
            <string>▲</string>
           </property>
@@ -95,18 +108,164 @@
          <widget class="QFrame" name="slidingPanel">
           <layout class="QVBoxLayout" name="slidingPanelLayout">
            <item>
-            <widget class="QLabel" name="panelLabel">
-             <property name="text">
-              <string>This is a label inside the sliding panel.</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="panelButton">
-             <property name="text">
-              <string>Button inside panel</string>
-             </property>
-            </widget>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_8">
+               <item row="1" column="5">
+                <widget class="QPushButton" name="Batterie">
+                 <property name="text">
+                  <string>Batterie</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="5">
+                <widget class="QPushButton" name="Trompette">
+                 <property name="text">
+                  <string>Trompette</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QPushButton" name="Violon">
+                 <property name="text">
+                  <string>Violon</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="6">
+                <widget class="QPushButton" name="Guitare">
+                 <property name="text">
+                  <string>Guitare</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="6">
+                <widget class="QPushButton" name="Clavecin">
+                 <property name="text">
+                  <string>Clavecin</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QPushButton" name="Piano">
+                 <property name="text">
+                  <string>Piano</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QGridLayout" name="gridLayout_6">
+               <item row="2" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_6">
+                 <item>
+                  <widget class="QSlider" name="Diese_Bemol">
+                   <property name="maximum">
+                    <number>2</number>
+                   </property>
+                   <property name="pageStep">
+                    <number>1</number>
+                   </property>
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="tickPosition">
+                    <enum>QSlider::TicksBelow</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label">
+                   <property name="text">
+                    <string>Numéro d'octave :</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="Octave">
+                   <property name="buttonSymbols">
+                    <enum>QAbstractSpinBox::UpDownArrows</enum>
+                   </property>
+                   <property name="maximum">
+                    <number>8</number>
+                   </property>
+                   <property name="displayIntegerBase">
+                    <number>10</number>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item row="1" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_5">
+                 <item>
+                  <widget class="QPushButton" name="Do">
+                   <property name="text">
+                    <string>Do</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="Re">
+                   <property name="text">
+                    <string>Re</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="Mi">
+                   <property name="text">
+                    <string>Mi</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="Fa">
+                   <property name="text">
+                    <string>Fa</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="Sol">
+                   <property name="text">
+                    <string>Sol</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="La">
+                   <property name="text">
+                    <string>La</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="Si">
+                   <property name="text">
+                    <string>Si</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
            </item>
           </layout>
          </widget>
@@ -123,7 +282,7 @@
      <x>0</x>
      <y>0</y>
      <width>1190</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
