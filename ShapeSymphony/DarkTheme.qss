@@ -619,13 +619,7 @@ QDateTimeEdit::drop-down {
 QComboBox::down-arrow,
 QDateTimeEdit::down-arrow {
   margin-top: -2px;
-  image: url(skin:controls/arrow_down.svg);
   width: 14px;
-}
-
-QComboBox::down-arrow:disabled,
-QDateTimeEdit::down-arrow:disabled {
-  image: url(skin:controls/arrow_down_disabled.svg);
 }
 
 QToolButton[popupMode="1"],
@@ -650,7 +644,6 @@ QPushButton::menu-indicator {
 QSpinBox::down-button,
 QAbstractSpinBox::down-button {
   padding-right: 4px;
-  image: url(skin:controls/arrow_down.svg);
   width: 14px;
   padding-bottom: 1px;
 }
@@ -663,14 +656,8 @@ QAbstractSpinBox::down-button:disabled {
 QSpinBox::up-button,
 QAbstractSpinBox::up-button {
   padding-right: 4px;
-  image: url(skin:controls/arrow_up.svg);
   width: 14px;
   padding-top: 1px;
-}
-
-QSpinBox::up-button:disabled,
-QAbstractSpinBox::up-button:disabled {
-  image: url(skin:controls/arrow_up_disabled.svg);
 }
 
 QComboBox QAbstractItemView {

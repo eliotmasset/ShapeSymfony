@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QButtonGroup>
 #include <QPropertyAnimation>
 
 namespace Ui {
@@ -20,12 +21,17 @@ private slots:
     void toggleSlidingPanel();
     void clickSimpleMode();
     void clickExpertMode();
+    void getActiveInstrument(QAbstractButton* button);
+    void getActiveNote(QAbstractButton* button);
 
 private:
+    void init();
+
     Ui::MainWindow *ui;
+    QButtonGroup *groupInstruments;
+    QButtonGroup *groupNotes;
     QPropertyAnimation *panelAnimation;
     void initTopPannel();
-    void init();
 };
 
 #endif // MAINWINDOW_H
