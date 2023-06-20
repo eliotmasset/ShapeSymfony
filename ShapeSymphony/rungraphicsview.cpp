@@ -14,6 +14,7 @@
 const int PADDING_RUN = 25;
 const int NB_LINES = 8;
 const int SIZE_RUN = 10;
+const float SIZE_CIRCLE = 1;
 const int FPS = 50;
 
 std::vector <CircleItem> VCircleItems;
@@ -93,7 +94,7 @@ void RunGraphicsView::paintEvent(QPaintEvent *event){
     painter.drawRect(paddingHorizontal,paddingVertical,size,size);
 
     if(this->showGrid) this->drawGrid(&painter);
-    double unitSize = size/SIZE_RUN;
+    double unitSize = (size/SIZE_RUN)*SIZE_CIRCLE;
 
     painter.setPen(circlePen);
     for (unsigned i = 0; i < VCircleItems.size(); i++){
@@ -110,10 +111,10 @@ void RunGraphicsView::advance()
         double newPosX = VCircleItems[i].getX()+(VCircleItems[i].getVitesseX()/FPS);
         double newPosY = VCircleItems[i].getY()+(VCircleItems[i].getVitesseY()/FPS);
 
-        if(newPosX+1 >= SIZE_RUN || newPosX <= 0) {
+        if(newPosX+SIZE_CIRCLE >= SIZE_RUN || newPosX <= 0) {
             VCircleItems[i].inverseX();
-            if (newPosY+1 >= SIZE_RUN|| newPosY <= 0) VCircleItems[i].inverseY();
-        } else if (newPosY+1 >= SIZE_RUN || newPosY <= 0) {
+            if (newPosY+SIZE_CIRCLE >= SIZE_RUN|| newPosY <= 0) VCircleItems[i].inverseY();
+        } else if (newPosY+SIZE_CIRCLE >= SIZE_RUN || newPosY <= 0) {
             VCircleItems[i].inverseY();
         } else {
             VCircleItems[i].setX(newPosX);
