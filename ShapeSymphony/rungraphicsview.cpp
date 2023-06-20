@@ -14,6 +14,8 @@
 const int PADDING_RUN = 25;
 const int NB_LINES = 8;
 const int SIZE_RUN = 10;
+const int FPS = 50;
+
 std::vector <CircleItem> VCircleItems;
 
 RunGraphicsView::RunGraphicsView(QWidget *parent)
@@ -31,8 +33,15 @@ void RunGraphicsView::init()
     QGraphicsScene *scene = new QGraphicsScene(this);
 
     CircleItem *circle = new CircleItem();
+    CircleItem *circle_2 = new CircleItem();
+    circle->setColor(QColor(100, 20, 255));
+    circle_2->setVitesseX(2);
+    circle_2->setVitesseY(3.5);
+    circle_2->setX(5);
+    circle_2->setY(5.5);
+    circle_2->setColor(QColor(25, 200, 150));
     VCircleItems.push_back(*circle);
-    scene->addItem(circle);
+    VCircleItems.push_back(*circle_2);
     setMouseTracking(true);
     setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
@@ -61,6 +70,10 @@ void RunGraphicsView::init()
     gridPen.setStyle(Qt::DashLine);
     gridPen.setDashPattern(dashes);
     gridPen.setColor(*(new QColor(200,200,200)));
+
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(advance()));
+    timer->start(1000/FPS); // = 20 (50 fps)
 }
 
 QPointF RunGraphicsView::getPosInRun(QPointF position) {
@@ -80,12 +93,34 @@ void RunGraphicsView::paintEvent(QPaintEvent *event){
     painter.drawRect(paddingHorizontal,paddingVertical,size,size);
 
     if(this->showGrid) this->drawGrid(&painter);
+    double unitSize = size/SIZE_RUN;
 
     painter.setPen(circlePen);
     for (unsigned i = 0; i < VCircleItems.size(); i++){
         QPointF pos = getPosInRun(QPointF(VCircleItems[i].getX(), VCircleItems[i].getY()));
-        painter.drawEllipse(pos.x(), pos.y(), size/SIZE_RUN, size/SIZE_RUN);
+        circlePen.setColor(VCircleItems[i].getColor());
+        painter.setPen(circlePen);
+        painter.drawEllipse(pos.x(), pos.y(), unitSize, unitSize);
     }
+}
+
+void RunGraphicsView::advance()
+{
+    for (unsigned i = 0; i < VCircleItems.size(); i++){
+        double newPosX = VCircleItems[i].getX()+(VCircleItems[i].getVitesseX()/FPS);
+        double newPosY = VCircleItems[i].getY()+(VCircleItems[i].getVitesseY()/FPS);
+
+        if(newPosX+1 >= SIZE_RUN || newPosX <= 0) {
+            VCircleItems[i].inverseX();
+            if (newPosY+1 >= SIZE_RUN|| newPosY <= 0) VCircleItems[i].inverseY();
+        } else if (newPosY+1 >= SIZE_RUN || newPosY <= 0) {
+            VCircleItems[i].inverseY();
+        } else {
+            VCircleItems[i].setX(newPosX);
+            VCircleItems[i].setY(newPosY);
+        }
+    }
+    this->update();
 }
 
 void RunGraphicsView::setObjectName(QAnyStringView name) {
