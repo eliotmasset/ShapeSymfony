@@ -1,18 +1,31 @@
 #ifndef CIRCLEITEM_H
 #define CIRCLEITEM_H
 
-#include <QGraphicsEllipseItem>
+#include <QColor>
 
-class CircleItem : public QGraphicsEllipseItem
+class CircleItem
 {
 public:
     CircleItem();
-    CircleItem(const CircleItem&);
-    int getX();
-    int getY();
+    double getX();
+    double getY();
+    void setX(double x);
+    void setY(double y);
+    double getVitesseX();
+    double getVitesseY();
+    void inverseX();
+    void inverseY();
+    void setVitesseX(double vitesseX);
+    void setVitesseY(double vitesseY);
+    QColor getColor();
+    void setColor(QColor color);
+
 private:
-    int x;
-    int y;
+    double x;
+    double y;
+    double vitesseX;
+    double vitesseY;
+    QColor color;
 };
 
 #endif // CIRCLEITEM_H

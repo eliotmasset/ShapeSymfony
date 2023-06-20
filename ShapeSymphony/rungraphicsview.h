@@ -4,6 +4,7 @@
 #include <QGraphicsView>
 #include <QMainWindow>
 #include <QLineEdit>
+#include <QTimer>
 
 class RunGraphicsView: public QGraphicsView
 {
@@ -16,6 +17,9 @@ public:
     void setShowGrid(bool showGrid = true);
     bool eventFilter(QObject *watched, QEvent *event);
 
+public slots:
+    void advance();
+
 private:
     RunGraphicsView *self;
     void paintEvent(QPaintEvent *event);
@@ -25,6 +29,7 @@ private:
     QPen squarePen, gridPen, circlePen;
     bool showGrid = true;
     bool ctrlPress = false;
+    QTimer *timer;
     QLineEdit* tooltipPosition;
     void init();
     void drawGrid(QPainter *painter);
