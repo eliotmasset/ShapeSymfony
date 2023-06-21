@@ -63,7 +63,7 @@ void RunGraphicsView::init()
 
     circlePen.setWidth(2);
     circlePen.setStyle(Qt::SolidLine);
-    circlePen.setColor(*(new QColor(255,0,255)));
+    circlePen.setColor(circle->getColor());
 
     QList<qreal> dashes;
     dashes << 4 << 8 << 4 << 8;
@@ -215,5 +215,10 @@ void RunGraphicsView::keyReleaseEvent(QKeyEvent *event)
     if(event->key() == Qt::Key_Control) {
         this->ctrlPress = false;
     }
+}
+
+std::vector <CircleItem> RunGraphicsView::getCircle()
+{
+    return this->VCircleItems;
 }
 

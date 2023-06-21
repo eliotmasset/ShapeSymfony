@@ -1,6 +1,7 @@
 #ifndef RUNGRAPHICSWIEW_H
 #define RUNGRAPHICSWIEW_H
 
+#include "circleitem.h"
 #include <QGraphicsView>
 #include <QMainWindow>
 #include <QLineEdit>
@@ -16,11 +17,13 @@ public:
     void setObjectName(QAnyStringView);
     void setShowGrid(bool showGrid = true);
     bool eventFilter(QObject *watched, QEvent *event);
+    std::vector <CircleItem> getCircle();
 
 public slots:
     void advance();
 
 private:
+    std::vector <CircleItem> VCircleItems;
     RunGraphicsView *self;
     void paintEvent(QPaintEvent *event);
     int size;
@@ -38,5 +41,7 @@ private:
     QPointF getPosInRun(QPointF position);
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
+signals:
+    void circleAdded();
 };
 #endif // RUNGRAPHICSWIEW_H

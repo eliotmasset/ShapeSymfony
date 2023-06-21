@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "circleitem.h"
+#include "qlistwidget.h"
 #include <QMainWindow>
 #include <QButtonGroup>
 #include <QPropertyAnimation>
@@ -17,6 +19,9 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+    void handleListWidgetItemClicked(QListWidgetItem *item);
+
 private slots:
     void toggleSlidingPanel();
     void clickSimpleMode();
@@ -32,6 +37,8 @@ private:
     QButtonGroup *groupNotes;
     QPropertyAnimation *panelAnimation;
     void initTopPannel();
+    void updateCircleListWidget();
 };
+
 
 #endif // MAINWINDOW_H

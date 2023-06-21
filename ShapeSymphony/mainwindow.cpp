@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "qlistwidget.h"
 #include "ui_mainwindow.h"
 #include "QtAwesome.h"
 
@@ -15,6 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->slidingPanel->setMaximumHeight(0);
     init();
+    RunGraphicsView *runGraphicsView = ui->run_graphics_view;
+    connect(runGraphicsView, &RunGraphicsView::circleAdded, this, &MainWindow::updateCircleListWidget);
 }
 
 MainWindow::~MainWindow()
@@ -29,6 +32,7 @@ void MainWindow::init()
     panelAnimation->setDuration(500);
     connect(ui->slidingPanelToggleButton, SIGNAL(clicked()), this, SLOT(toggleSlidingPanel()));
     ui->run_graphics_view->setShowGrid(false);
+    connect(ui->listWidget, &QListWidget::itemClicked, this, &MainWindow::handleListWidgetItemClicked);
 
     // icons :
     QtAwesome* awesome = new QtAwesome(qApp);
@@ -71,6 +75,7 @@ void MainWindow::init()
     ui->La->setAutoExclusive(true);
     groupNotes->addButton(ui->Si);
     ui->Si->setAutoExclusive(true);
+    this->updateCircleListWidget();
 }
 
 void MainWindow::toggleSlidingPanel()
@@ -112,5 +117,37 @@ void MainWindow::initTopPannel() {
     ui->simple_mode_button->setChecked(true);
     connect(ui->simple_mode_button, SIGNAL(clicked()), this, SLOT(clickSimpleMode()));
     connect(ui->expert_mode_button, SIGNAL(clicked()), this, SLOT(clickExpertMode()));
+}
+
+void MainWindow::updateCircleListWidget()
+{
+    ui->listWidget->clear();
+    int i = 0;
+    for (CircleItem& circle : ui->run_graphics_view->getCircle()) {
+        QString circleText = QString("Circle n°%1").arg(i);
+        QListWidgetItem* item = new QListWidgetItem(circleText);
+        QPixmap pixmap(20, 20); // Créez une pixmap pour le cercle
+        pixmap.fill(circle.getColor()); // Remplissez la pixmap avec la couleur du cercle
+        QIcon icon(pixmap); // Créez une icône à partir de la pixmap
+        item->setIcon(icon); // Définissez l'icône de l'élément
+        ui->listWidget->addItem(item);
+        i++;
+    }
+}
+
+// Slot implementation
+void MainWindow::handleListWidgetItemClicked(QListWidgetItem *item)
+{
+    // Obtain the CircleItem object associated with the clicked item
+    CircleItem *circle = item->data(Qt::UserRole).value<CircleItem*>();
+    if (circle) {
+        ui->listWidget_2->clear();
+        ui->listWidget_2->addItem("X: " + QString::number(circle->getX()));
+        ui->listWidget_2->addItem("Y: " + QString::number(circle->getY()));
+        ui->listWidget_2->addItem("Couleur: " + circle->getColor().name());
+
+        // Change the current page of the QStackedWidget to display the second QListWidget
+        ui->stackedWidget->setCurrentWidget(ui->listWidget_2);
+    }
 }
 
