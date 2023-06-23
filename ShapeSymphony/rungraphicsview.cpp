@@ -164,7 +164,7 @@ QPointF RunGraphicsView::getPosMouseInRun(QPointF position) {
 
 void RunGraphicsView::setMouseTooltip(QGraphicsSceneMouseEvent *event) {
     const QPointF position = getPosMouseInRun(event->scenePos());
-    if((position.x() > 0 && position.x()< SIZE_RUN) && (position.y()>0 && position.y()<SIZE_RUN)){
+    if((position.x() >= 0 && position.x()<= SIZE_RUN) && (position.y()>=0 && position.y()<=SIZE_RUN)){
         QString pos_x = QString::number(position.x());
         QString pos_y = QString::number(position.y());
         this->tooltipPosition->setText(pos_x+";"+pos_y);
