@@ -7,6 +7,7 @@
 #include <QToolTip>
 #include <QCursor>
 #include <QKeyEvent>
+#include <QJsonObject>
 #include "circleitem.h"
 #include <vector>
 #include <iostream>
@@ -220,5 +221,14 @@ void RunGraphicsView::keyReleaseEvent(QKeyEvent *event)
 std::vector <CircleItem> RunGraphicsView::getCircle()
 {
     return this->VCircleItems;
+}
+
+QJsonObject RunGraphicsView::getJSONDatas()
+{
+    QJsonObject circles;
+    for (CircleItem& circle : this->VCircleItems) {
+        circles[std::to_string(circle.getId()).c_str()] = circle.getJSONDatas();
+    }
+    return circles;
 }
 

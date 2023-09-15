@@ -38,6 +38,7 @@ private:
     QPropertyAnimation *panelAnimation;
     void initTopPannel();
     void updateCircleListWidget();
+    void getJsonDatas();
 };
 
 

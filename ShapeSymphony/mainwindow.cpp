@@ -3,6 +3,7 @@
 #include "ui_mainwindow.h"
 #include "QtAwesome.h"
 
+#include <QJsonObject>
 #include <QPropertyAnimation>
 
 using namespace fa;
@@ -76,6 +77,8 @@ void MainWindow::init()
     groupNotes->addButton(ui->Si);
     ui->Si->setAutoExclusive(true);
     this->updateCircleListWidget();
+
+    this->getJsonDatas();
 }
 
 void MainWindow::toggleSlidingPanel()
@@ -150,4 +153,17 @@ void MainWindow::handleListWidgetItemClicked(QListWidgetItem *item)
         ui->stackedWidget->setCurrentWidget(ui->listWidget_2);
     }
 }
+
+void MainWindow::getJsonDatas() {
+
+    QJsonObject save;
+    ui->run_graphics_view->getCircle().data();
+    save["CirclesItems"] = ui->run_graphics_view->getJSONDatas();
+    save["name"] = "test";
+    qDebug() << save;
+}
+
+
+
+
 

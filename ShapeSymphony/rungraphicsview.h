@@ -18,6 +18,7 @@ public:
     void setShowGrid(bool showGrid = true);
     bool eventFilter(QObject *watched, QEvent *event);
     std::vector <CircleItem> getCircle();
+    QJsonObject getJSONDatas();
 
 public slots:
     void advance();
